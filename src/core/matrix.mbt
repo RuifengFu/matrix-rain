@@ -61,7 +61,7 @@ struct Droplet {
   mut curRow : Int
   height : Int
   speed : Int
-  chars : String
+  chars : Array[String]
 }
 
 ///|
@@ -80,7 +80,7 @@ pub fn MatrixRain::new() -> MatrixRain {
 }
 
 ///|
-pub fn MatrixRain::generateChars(self : MatrixRain, len : Int) -> String {
+pub fn MatrixRain::generateChars(self : MatrixRain, len : Int) -> Array[String] {
   let (start, end) = match self.charRange {
     Ascii => (33, 126)
     Braille => (0x2840, 0x28FF)
@@ -92,16 +92,17 @@ pub fn MatrixRain::generateChars(self : MatrixRain, len : Int) -> String {
   for i in 0..<len {
     let char = self.rand.int(limit=end - start) + start
     if char < 0x10000 {
-      chars.push(Char::from_int(char))
+      chars.push(Char::from_int(char).to_string())
     } else {
-      let adjusted = char - 0x10000
-      let high = 0xD800 + (adjusted >> 10)
-      let low = 0xDC00 + (adjusted & 0x3FF)
-      chars.push(Char::from_int(high))
-      chars.push(Char::from_int(low))
+      // let adjusted = char - 0x10000
+      // let high = 0xD800 + (adjusted >> 10)
+      // let low = 0xDC00 + (adjusted & 0x3FF)
+      // chars.push(Char::from_int(high))
+      // chars.push(Char::from_int(low))
+      chars.push(Char::from_int(char).to_string())
     }
   }
-  String::from_array(chars)
+  chars
 }
 
 ///|

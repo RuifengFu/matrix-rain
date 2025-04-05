@@ -37,12 +37,13 @@ async fn sleep(duration : Int) -> Unit! {
 ///|
 fn main {
   let rain = MatrixRain::new()
+  rain.charRange = Emoji
   rain.run()
   run_async(fn() {
     try {
       while true {
         rain.render_frame()
-        sleep!!(16)
+        sleep!!(33)
       }
     } catch {
       _ => {
