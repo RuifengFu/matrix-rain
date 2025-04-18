@@ -39,5 +39,5 @@ const Bold = "\u001b[1m"
 
 ///|
 pub fn output_color(c : Int) -> String {
-  "\{CtlEsc}\{c};1m"
+  "\{CtlEsc}\{c}m"
 }

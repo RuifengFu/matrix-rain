@@ -1,7 +1,9 @@
 {
   "is-main": true,
   "import": [
-    "ruifeng/matrix-rain/core"
+    "ruifeng/matrix-rain/core",
+    "Yoorkin/ArgParser",
+    "moonbitlang/x/sys"
   ],
   "targets": {
     "main.mbt": ["js"] 

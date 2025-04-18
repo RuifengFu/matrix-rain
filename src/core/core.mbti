@@ -1,0 +1,76 @@
+package "ruifeng/matrix-rain/core"
+
+import(
+  "moonbitlang/core/random"
+)
+
+// Values
+fn bgRgb(Int, Int, Int) -> String
+
+fn cursorPos(Int, Int) -> String
+
+fn fgRgb(Int, Int, Int) -> String
+
+fn output_color(Int) -> String
+
+// Types and methods
+pub(all) enum CharSet {
+  Ascii
+  Braille
+  Katakana
+  Emoji
+  File(String)
+}
+impl Show for CharSet
+
+pub(all) enum Color {
+  Black
+  Red
+  Green
+  Yellow
+  Blue
+  Magenta
+  Cyan
+  White
+  RGB(Int, Int, Int)
+}
+impl Color {
+  to_int(Self) -> Int
+}
+impl Show for Color
+
+pub(all) enum Direction {
+  Horizontal
+  Vertical
+}
+impl Show for Direction
+
+type Droplet
+impl Show for Droplet
+
+pub(all) struct MatrixRain {
+  direction : Direction
+  color : Color
+  mut charRange : CharSet
+  maxSpeed : Int
+  mut columns : Int
+  mut rows : Int
+  rand : @random.Rand
+  colDroplets : Array[Array[Droplet]]
+  buffer : Array[String]
+}
+impl MatrixRain {
+  generateChars(Self, Int) -> Array[String]
+  make_droplet(Self, Int) -> Droplet
+  new() -> Self
+  render_frame(Self) -> Unit
+  resize(Self, Int, Int) -> Unit
+  run(Self) -> Unit
+  stop(Self) -> Unit
+  write_at(Self, Int, Int, String, String) -> Unit
+}
+
+// Type aliases
+
+// Traits
+

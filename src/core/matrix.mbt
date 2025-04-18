@@ -17,7 +17,7 @@ extern "js" fn process_cols() -> Int =
 pub(all) enum Direction {
   Horizontal
   Vertical
-}
+} derive(Show)
 
 ///|
 pub(all) enum Color {
@@ -30,7 +30,7 @@ pub(all) enum Color {
   Cyan
   White
   RGB(Int, Int, Int)
-}
+} derive(Show)
 
 ///|
 pub(all) enum CharSet {
@@ -39,7 +39,7 @@ pub(all) enum CharSet {
   Katakana
   Emoji
   File(String)
-}
+} derive(Show)
 
 ///|
 pub(all) struct MatrixRain {
@@ -62,7 +62,7 @@ struct Droplet {
   height : Int
   speed : Int
   chars : Array[String]
-}
+} 
 
 ///|
 pub fn MatrixRain::new() -> MatrixRain {
@@ -214,9 +214,9 @@ pub fn MatrixRain::render_frame(self : MatrixRain) -> Unit {
       let height = droplet.height
       let charsLen = droplet.chars.length()
       if droplet.alive % droplet.speed == 0 {
-        // 避免在最后一行绘制，防止终端滚动
+
         if curRow - 1 >= 0 &&
-          curRow - 1 < self.rows - 1 &&
+          curRow - 1 < self.rows &&
           curRow - 1 < charsLen {
           self.write_at(
             curRow - 1,
@@ -226,8 +226,8 @@ pub fn MatrixRain::render_frame(self : MatrixRain) -> Unit {
           )
         }
 
-        // 避免在最后一行绘制
-        if curRow >= 0 && curRow < self.rows - 1 && curRow < charsLen {
+
+        if curRow >= 0 && curRow < self.rows && curRow < charsLen {
           self.write_at(
             curRow,
             curCol,
